@@ -40,7 +40,7 @@ class Router extends Controller
         } else {
 
             // Read Routes defination
-            require_once BD . '/Routes.php';
+            require_once W3APP . '/Routes.php';
 
             // REQUEST URI (GET Requests)
             $uri = (rtrim($_SERVER["REQUEST_URI"], "/") != null) ? rtrim($_SERVER["REQUEST_URI"], "/") : $rx['default'];
