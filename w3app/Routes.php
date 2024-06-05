@@ -9,8 +9,7 @@
 $rx['default'] = "/w3/portal/home";
 
 $rx['static'] = [
-    
-    // Matching top to botton
+    // Matching top to bottom
     "home"      => "/w3/portal/home",
     "features"  => "/w3/portal/features",
     "pricing"   => "/w3/portal/pricing",
