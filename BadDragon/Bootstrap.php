@@ -10,7 +10,7 @@
 require_once W3APP . "/env.php";
 
 // Fetch BadDragon config
-// require_once BD . "/Config.php";
+require_once BD . "/Config.php";
 
 // Autoload
 if (!defined('BADDRAGON')) {
@@ -24,10 +24,8 @@ use BadDragon\Router;
 //die("Bd");
 
 $dragon = new Controller;
-// die("Cn");
 $route = new Router;
-var_dump($route);
-die;
+// var_dump($route); die;
 
 // Common Functions
 require_once BD . "/Common.php";

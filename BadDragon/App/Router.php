@@ -26,9 +26,17 @@ class Router extends Controller
 
             // POST Method
             $this->a = $_POST["a"];
+            
+            /* Auto routing */
+            $p = explode("-", $this->a);
+            $this->parts = [
+                ((isset($p[0]) ? $p[0] : 'x')),
+                ((isset($p[1]) ? $p[1] : 'x')),
+                ((isset($p[2]) ? $p[2] : 'x')),
+            ];
 
             // Parse Module | Controller | Method for this request
-            $this->autoroute('-');
+            $this->autoroute();
         } else {
 
             // REQUEST URI (GET Requests)
@@ -39,9 +47,19 @@ class Router extends Controller
             // die($uri);
 
             $this->a = $uri;
+            $this->uri = $uri;
+
+
+            /* Auto routing */
+            $p = explode("/", $this->a);
+            $this->parts = [
+                ((isset($p[1]) ? $p[1] : 'x')),
+                ((isset($p[2]) ? $p[2] : 'x')),
+                ((isset($p[3]) ? $p[3] : 'x')),
+            ];
 
             // Parse Module | Controller | Method for this request
-            $this->autoroute('/');
+            $this->autoroute();
         }
 
         // Read Routes defination
@@ -51,22 +69,19 @@ class Router extends Controller
         // todo
     }
 
-    private function autoroute($delimiter)
+    private function autoroute()
     {
-
-        /* Auto routing */
-        $parts = explode($delimiter, $this->a);
-        $this->parts = $parts;
+        $parts = $this->parts;
         // var_dump($parts); die;
 
         if (isset($parts)) {
 
-            if (count($parts) > 3) {
-                $this->module       = ucfirst($parts[1]);
-                $this->controller   = ucfirst($parts[2]);
-                $this->method       = $parts[3];
+            if (count($parts) > 2) {
+                $this->module       = ucfirst($parts[0]);
+                $this->controller   = ucfirst($parts[1]);
+                $this->method       = $parts[2];
             } else {
-                header("Location:" . BASE_URL . "studio/home.cgi");
+                header("Location:" . BASE_URL . "/home");
                 die;
                 //die("Incomplete routing info...");
             }

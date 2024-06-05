@@ -19,9 +19,9 @@ class Controller
 
     public function fire($route)
     {
-        $controllerModule = BD . 'Controller/' . $route->module . '/' . $route->module . '.php';
-        $controllerMethod = BD . 'Controller/' . $route->module . '/' . $route->controller . '/' . $route->controller . '.php';
-        $controllerScript = BD . 'Controller/' . $route->module . '/' . $route->controller . '/' . $route->method . '.php';
+        $controllerModule = W3APP . '/Controller/' . $route->module . '/' . $route->module . '.php';
+        $controllerMethod = W3APP . '/Controller/' . $route->module . '/' . $route->controller . '/' . $route->controller . '.php';
+        $controllerScript = W3APP . '/Controller/' . $route->module . '/' . $route->controller . '/' . $route->method . '.php';
 
         if (!is_file($controllerModule)) {
             die("Module " . $controllerMethod . " files missing...");
