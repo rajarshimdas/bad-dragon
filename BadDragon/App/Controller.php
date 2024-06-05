@@ -14,7 +14,7 @@ class Controller
 
     public function __construct()
     {
-        // echo "Hello from bad-dragon";
+        // die("Hello from bad-dragon");
     }
 
     public function fire($route)

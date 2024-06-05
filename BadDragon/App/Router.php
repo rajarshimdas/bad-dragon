@@ -32,11 +32,13 @@ class Router extends Controller
         } else {
 
             // REQUEST URI (GET Requests)
-            $r = $_SERVER["REQUEST_URI"];
+            //$r = $_SERVER["REQUEST_URI"];
             # die($r);
-            $uri = explode("?", $r);
+            //$uri = explode("?", $r);
+            $uri = $_SERVER["REQUEST_URI"];
+            // die($uri);
 
-            $this->a = $uri[1];
+            $this->a = $uri;
 
             // Parse Module | Controller | Method for this request
             $this->autoroute('/');
@@ -55,15 +57,14 @@ class Router extends Controller
         /* Auto routing */
         $parts = explode($delimiter, $this->a);
         $this->parts = $parts;
-        # var_dump($parts);
-        # die();
+        // var_dump($parts); die;
 
         if (isset($parts)) {
 
-            if (count($parts) > 2) {
-                $this->module       = ucfirst($parts[0]);
-                $this->controller   = ucfirst($parts[1]);
-                $this->method       = $parts[2];
+            if (count($parts) > 3) {
+                $this->module       = ucfirst($parts[1]);
+                $this->controller   = ucfirst($parts[2]);
+                $this->method       = $parts[3];
             } else {
                 header("Location:" . BASE_URL . "studio/home.cgi");
                 die;

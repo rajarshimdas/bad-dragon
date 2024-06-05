@@ -7,24 +7,30 @@
 +-------------------------------------------------------+
 */
 
+require_once W3APP . "/env.php";
+
 // Fetch BadDragon config
-require_once BD . "Config.php";
+// require_once BD . "/Config.php";
 
 // Autoload
 if (!defined('BADDRAGON')) {
-    require_once BD . 'Autoload.php';
+    require_once BD . '/Autoload.php';
 }
+//die("Autoload");
 
 // Invoke BadDragon
 use BadDragon\Controller;
 use BadDragon\Router;
+//die("Bd");
 
 $dragon = new Controller;
+// die("Cn");
 $route = new Router;
-// var_dump($route);
+var_dump($route);
+die;
 
 // Common Functions
-require_once BD."Controller/Common.php";
+require_once BD . "/Common.php";
 
 // Request controllers
 $cn = $dragon->fire($route);

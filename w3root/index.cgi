@@ -8,10 +8,10 @@
 */
 
 // Bootstrap
-require_once $_SERVER["DOCUMENT_ROOT"] . '/paths.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/paths.cgi';
 
 // Invoke BadDragon
-require_once BD.'Controller/Bootstrap.php';
+require_once BD.'/Bootstrap.php';
 
 // Clean up
 if (isset($mysqli)) $mysqli->close();
