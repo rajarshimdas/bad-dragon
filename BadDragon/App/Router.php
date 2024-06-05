@@ -39,37 +39,46 @@ class Router extends Controller
             $this->autoroute();
         } else {
 
+            // Read Routes defination
+            require_once BD . '/Routes.php';
+
             // REQUEST URI (GET Requests)
-            $uri = $_SERVER["REQUEST_URI"];
-            // die($uri);
+            $uri = (rtrim($_SERVER["REQUEST_URI"], "/") != null) ? rtrim($_SERVER["REQUEST_URI"], "/") : $rx['default'];
+            //$uri = $_SERVER["REQUEST_URI"];
+            //die($uri);
+
+            /*
+            if (!alpha_numeric_dash_slash($uri)) {
+                show404("Invalid URI");
+            }
+            */
 
             /* Parts in route */
             $p = explode("/", $uri);
             // var_dump($p);
 
-            // Read Routes defination
-            require_once BD . '/Routes.php';
 
-            if (isset($rx["static"][$p[1]])) {
-                // die("static: " . $rx["static"][$p[1]]);
-                $this->uri = $rx["static"][$p[1]];
-            } elseif (isset($rx["static"][$p[1] . '/' . $p[2]])) {
+            if (isset($rx["static"][$p[1] . '/' . $p[2]])) {
                 // die("static: " . $rx["static"][$p[1]]);
                 $this->uri = $rx["static"][$p[1] . '/' . $p[2]];
+            } elseif (isset($rx["static"][$p[1]])) {
+                // die("static: " . $rx["static"][$p[1]]);
+                $this->uri = $rx["static"][$p[1]];
             } else {
                 // Auto route
                 $this->uri = $uri;
             }
 
             $parts = explode("/", $this->uri);
-            
+
             // Validate all parts for auto route are available
-            for ($i=1; $i < 4; $i++) { 
-                if (!isset($parts[$i]) || $parts[$i] == NULL){
-                    die("404! That route was not found.");
+            for ($i = 1; $i < 4; $i++) {
+                if (!isset($parts[$i]) || $parts[$i] == NULL) {
+                    // die("404! That route was not found.");
+                    show404("404! That route was not found.");
                 }
             }
-            
+
             $this->parts = [
                 $parts[1],
                 $parts[2],

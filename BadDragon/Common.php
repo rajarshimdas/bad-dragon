@@ -12,6 +12,9 @@
 */
 
 // Capture Session Vars
+
+use BadDragon\Router;
+
 $bdMessageTxt = $_SESSION['bdMessageTxt'];
 $bdMessageFlag = $_SESSION['bdMessageFlag'];
 
@@ -59,6 +62,16 @@ $monthNum2Cal = [
 | Functions                                             |
 +-------------------------------------------------------+
 */
+function show404($m){
+    
+    die($m);
+}
+
+function alpha_numeric_dash_slash($str)
+{
+	return (bool) preg_match('/^[a-z0-9-//]+$/i', $str);
+}
+
 function bdGo2uri(string $uri): bool
 {
     header("Location:?$uri");

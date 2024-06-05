@@ -24,15 +24,27 @@ class Controller
         $controllerScript = W3APP . '/Controller/' . $route->module . '/' . $route->controller . '/' . $route->method . '.php';
 
         if (!is_file($controllerModule)) {
-            die("Module " . $controllerMethod . " files missing...");
+            if (ENV == 'dev') {
+                die("Module " . $controllerMethod . " files missing...");
+            } else {
+                show404("Module | " . $route->uri);
+            };
         };
 
         if (!is_file($controllerMethod)) {
-            die("Controller Method " . $controllerMethod . " is missing...");
+            if (ENV == 'dev') {
+                die("Controller Method " . $controllerMethod . " is missing...");
+            } else {
+                show404("Method | " . $route->uri);
+            };
         };
 
         if (!is_file($controllerScript)) {
-            die("Controller Method Script " . $controllerScript . " is missing...");
+            if (ENV == 'dev') {
+                die("Controller Method Script " . $controllerScript . " is missing...");
+            } else {
+                show404("Script | " . $route->uri);
+            };
         };
 
         $rx = [
