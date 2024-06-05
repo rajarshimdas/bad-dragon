@@ -6,3 +6,13 @@
 | Updated On:                                           |
 +-------------------------------------------------------+
 */
+$rx['default'] = "home";
+
+$rx['static'] = [
+    "home"      => "/w3/portal/home",
+    "features"  => "/w3/portal/features",
+    "pricing"   => "/w3/portal/pricing",
+
+    "blog"          =>  "/blog/article/home",
+    "blog/article1" =>  "/blog/article/1",
+];

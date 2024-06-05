@@ -26,7 +26,7 @@ class Router extends Controller
 
             // POST Method
             $this->a = $_POST["a"];
-            
+
             /* Auto routing */
             $p = explode("-", $this->a);
             $this->parts = [
@@ -40,33 +40,45 @@ class Router extends Controller
         } else {
 
             // REQUEST URI (GET Requests)
-            //$r = $_SERVER["REQUEST_URI"];
-            # die($r);
-            //$uri = explode("?", $r);
             $uri = $_SERVER["REQUEST_URI"];
             // die($uri);
 
-            $this->a = $uri;
-            $this->uri = $uri;
+            /* Parts in route */
+            $p = explode("/", $uri);
+            // var_dump($p);
 
+            // Read Routes defination
+            require_once BD . '/Routes.php';
 
-            /* Auto routing */
-            $p = explode("/", $this->a);
+            if (isset($rx["static"][$p[1]])) {
+                // die("static: " . $rx["static"][$p[1]]);
+                $this->uri = $rx["static"][$p[1]];
+            } elseif (isset($rx["static"][$p[1] . '/' . $p[2]])) {
+                // die("static: " . $rx["static"][$p[1]]);
+                $this->uri = $rx["static"][$p[1] . '/' . $p[2]];
+            } else {
+                // Auto route
+                $this->uri = $uri;
+            }
+
+            $parts = explode("/", $this->uri);
+            
+            // Validate all parts for auto route are available
+            for ($i=1; $i < 4; $i++) { 
+                if (!isset($parts[$i]) || $parts[$i] == NULL){
+                    die("404! That route was not found.");
+                }
+            }
+            
             $this->parts = [
-                ((isset($p[1]) ? $p[1] : 'x')),
-                ((isset($p[2]) ? $p[2] : 'x')),
-                ((isset($p[3]) ? $p[3] : 'x')),
+                $parts[1],
+                $parts[2],
+                $parts[3],
             ];
 
             // Parse Module | Controller | Method for this request
             $this->autoroute();
         }
-
-        // Read Routes defination
-        require_once BD . '/Routes.php';
-
-        // Find this route
-        // todo
     }
 
     private function autoroute()
