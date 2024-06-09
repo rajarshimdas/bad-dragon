@@ -21,6 +21,7 @@ $rx['static'] = [
     */
 
     # CONCERT
-    
+    "concert"      => "/w3/concert/home",
+
 
 ];
