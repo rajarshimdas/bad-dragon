@@ -1,1 +1,5 @@
-<?php view($route, "home");
+<?php 
+
+phpinfo();
+
+view($route, "home");
